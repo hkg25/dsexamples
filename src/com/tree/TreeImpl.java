@@ -1,9 +1,10 @@
-package com;
+package com.tree;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class TreeImpl<T> {
 
 	private TreeNode<T> root;
@@ -47,15 +48,7 @@ public class TreeImpl<T> {
 		return root == null;
 	}
 
-	public void addNodeAtIndex(T data, int index) {
-		// TODO : Add implementation
-	}
-
 	public void deleteNode() {
-		// TODO : Add implementation
-	}
-
-	public void deleteNodeAtIndex() {
 		// TODO : Add implementation
 	}
 
@@ -129,7 +122,7 @@ public class TreeImpl<T> {
 		}
 		return count;
 	}
-
+	
 	private List<T> preOrderNonRecursive(TreeNode<T> node) {
 		List<T> list = new ArrayList<>();
 		if (node == null)
