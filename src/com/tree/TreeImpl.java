@@ -1,10 +1,12 @@
 package com.tree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
-@SuppressWarnings({"rawtypes","unchecked"})
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class TreeImpl<T> {
 
 	private TreeNode<T> root;
@@ -66,63 +68,11 @@ public class TreeImpl<T> {
 	private void preOrder(TreeNode<T> node) {
 		if (node != null) {
 			System.out.print(node.getData() + "-->");
-			inOrder(node.getLeftNode());
-			inOrder(node.getRightNode());
+			preOrder(node.getLeftNode());
+			preOrder(node.getRightNode());
 		}
 	}
 
-	public void postOrder(boolean isRecursive) {
-		if (isRecursive) {
-			postOrder(root);
-		} else {
-			List<T> list = postOrderNonRecursive(root);
-			for (T data : list) {
-				System.out.print(data + "-->");
-			}
-		}
-	}
-
-	private void postOrder(TreeNode<T> node) {
-		if (node != null) {
-			inOrder(node.getLeftNode());
-			inOrder(node.getRightNode());
-			System.out.print(node.getData() + "-->");
-		}
-	}
-
-	public void inOrder(boolean isRecursive) {
-		if (isRecursive) {
-			inOrder(root);
-		} else {
-			List<T> list = inOrderNonRecursive(root);
-			for (T data : list) {
-				System.out.print(data + "-->");
-			}
-		}
-	}
-
-	private void inOrder(TreeNode<T> node) {
-		if (node != null) {
-			inOrder(node.getLeftNode());
-			System.out.print(node.getData() + "-->");
-			inOrder(node.getRightNode());
-		}
-	}
-
-	public int count() {
-		return countNodes(root);
-	}
-
-	private int countNodes(TreeNode<T> node) {
-		int count = 0;
-		if (node != null) {
-			count = 1;
-			count += countNodes(node.getLeftNode());
-			count += countNodes(node.getRightNode());
-		}
-		return count;
-	}
-	
 	private List<T> preOrderNonRecursive(TreeNode<T> node) {
 		List<T> list = new ArrayList<>();
 		if (node == null)
@@ -142,26 +92,23 @@ public class TreeImpl<T> {
 		return list;
 	}
 
-	private List<T> inOrderNonRecursive(TreeNode<T> node) {
-		List<T> list = new ArrayList<>();
-		Stack<TreeNode> stack = new Stack<>();
-		Boolean done = Boolean.FALSE;
-		TreeNode<T> currentNode = node;
-		while (!done) {
-			if (currentNode != null) {
-				stack.push(currentNode);
-				currentNode = currentNode.getLeftNode();
-			} else {
-				if (stack.isEmpty()) {
-					done = true;
-				} else {
-					currentNode = stack.pop();
-					list.add(currentNode.getData());
-					currentNode = currentNode.getRightNode();
-				}
+	public void postOrder(boolean isRecursive) {
+		if (isRecursive) {
+			postOrder(root);
+		} else {
+			List<T> list = postOrderNonRecursive(root);
+			for (T data : list) {
+				System.out.print(data + "-->");
 			}
 		}
-		return list;
+	}
+
+	private void postOrder(TreeNode<T> node) {
+		if (node != null) {
+			postOrder(node.getLeftNode());
+			postOrder(node.getRightNode());
+			System.out.print(node.getData() + "-->");
+		}
 	}
 
 	private List<T> postOrderNonRecursive(TreeNode<T> node) {
@@ -189,6 +136,85 @@ public class TreeImpl<T> {
 			prev = current;
 		}
 		return list;
+	}
+
+	public void inOrder(boolean isRecursive) {
+		if (isRecursive) {
+			inOrder(root);
+		} else {
+			List<T> list = inOrderNonRecursive(root);
+			for (T data : list) {
+				System.out.print(data + "-->");
+			}
+		}
+	}
+
+	private void inOrder(TreeNode<T> node) {
+		if (node != null) {
+			inOrder(node.getLeftNode());
+			System.out.print(node.getData() + "-->");
+			inOrder(node.getRightNode());
+		}
+	}
+
+	private List<T> inOrderNonRecursive(TreeNode<T> node) {
+		List<T> list = new ArrayList<>();
+		Stack<TreeNode> stack = new Stack<>();
+		Boolean done = Boolean.FALSE;
+		TreeNode<T> currentNode = node;
+		while (!done) {
+			if (currentNode != null) {
+				stack.push(currentNode);
+				currentNode = currentNode.getLeftNode();
+			} else {
+				if (stack.isEmpty()) {
+					done = true;
+				} else {
+					currentNode = stack.pop();
+					list.add(currentNode.getData());
+					currentNode = currentNode.getRightNode();
+				}
+			}
+		}
+		return list;
+	}
+	
+	public void levelOrderTraversal(){
+		levelOrderTraversal(root);
+	}
+	
+	//TODO : Add Complete Implementation
+	private List<List<T>> levelOrderTraversal(TreeNode<T> node){
+		List<List<T>> list = new ArrayList<>();
+		if(node ==null){
+			return list;
+		}
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		queue.offer(null);
+		List<T> elems = new ArrayList<>();
+		while(!queue.isEmpty()){
+			TreeNode<T> tempNode = queue.poll();
+			if(tempNode != null){
+				
+			}
+		}
+		return null;
+		
+	}
+
+	public int count() {
+		return countNodes(root);
+	}
+
+	private int countNodes(TreeNode<T> node) {
+		int count = 0;
+		if (node != null) {
+			count = 1;
+			count += countNodes(node.getLeftNode());
+			count += countNodes(node.getRightNode());
+		}
+		return count;
 	}
 
 }
