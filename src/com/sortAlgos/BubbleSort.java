@@ -8,9 +8,9 @@ package com.sortAlgos;
  * @author hgarg
  *
  */
-public class BubbleSort {
+public class BubbleSort extends AbstractSort {
 
-	public static void sort(int[] array) {
+	public void sort(int[] array) {
 		int length = array.length;
 		for (int i = 0; i < length; i++) {
 			boolean swapped = Boolean.FALSE;
@@ -29,17 +29,11 @@ public class BubbleSort {
 		}
 	}
 
-	public static void printArray(int arr[]) {
-		int n = arr.length;
-		for (int i = 0; i < n; ++i)
-			System.out.print(arr[i] + " ");
-		System.out.println();
-	}
-
 	public static void main(String[] args) {
+		BubbleSort bubble = new BubbleSort();
 		int arr[] = { 1, 4, 6, 2, 34, 23, 12, 9, 8, 22 };
-		BubbleSort.sort(arr);
-		BubbleSort.printArray(arr);
+		bubble.sort(arr);
+		bubble.printArray(arr);
 	}
 
 }

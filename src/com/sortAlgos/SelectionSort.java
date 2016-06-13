@@ -7,9 +7,9 @@ package com.sortAlgos;
  * @author hgarg
  *
  */
-public class SelectionSort {
+public class SelectionSort extends AbstractSort {
 
-	public static void sort(int[] array) {
+	public void sort(int[] array) {
 		int length = array.length;
 		for (int i = 0; i < length; i++) {
 			int minIndex = i;
@@ -27,17 +27,12 @@ public class SelectionSort {
 		}
 	}
 
-	public static void printArray(int arr[]) {
-		int n = arr.length;
-		for (int i = 0; i < n; ++i)
-			System.out.print(arr[i] + " ");
-		System.out.println();
-	}
 
 	public static void main(String[] args) {
+		SelectionSort select = new SelectionSort();
 		int arr[] = { 1, 4, 6, 2, 34, 23, 12, 9, 8, 22 };
-		SelectionSort.sort(arr);
-		SelectionSort.printArray(arr);
+		select.sort(arr);
+		select.printArray(arr);
 	}
 
 }
