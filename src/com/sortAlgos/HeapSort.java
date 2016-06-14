@@ -4,8 +4,23 @@ public class HeapSort extends AbstractSort {
 
 	@Override
 	public void sort(int[] array) {
-		int length = array.length;
-		
+		int n = array.length;
+
+		// Build heap (rearrange array)
+		for (int i = n / 2 - 1; i >= 0; i--)
+			heapify(array, n, i);
+
+		// One by one extract an element from heap
+		for (int i = n - 1; i >= 0; i--) {
+			// Move current root to end
+			int temp = array[0];
+			array[0] = array[i];
+			array[i] = temp;
+
+			// call max heapify on the reduced heap
+			heapify(array, i, 0);
+		}
+
 	}
 
 	// To heapify a subtree rooted with node i which is
@@ -15,11 +30,11 @@ public class HeapSort extends AbstractSort {
 		int leftNode = 2 * i + 1; // left node
 		int rightNode = 2 * i + 2; // right node
 		// if left node is larger than root node
-		if (largest < leftNode)
+		if (leftNode < n && array[leftNode] > array[largest])
 			largest = leftNode;
 
 		// if left node is larger than root node
-		if (largest < rightNode)
+		if (rightNode < n && array[rightNode] > array[largest])
 			largest = rightNode;
 
 		// if largest is not the root
