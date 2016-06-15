@@ -10,6 +10,13 @@ package com.sortAlgos;
  * Counting sort can not be applied here as we use keys as index in counting
  * sort. Here keys are floating point numbers.
  * 
+ * bucketSort(array[], n) 
+ * 1) Create n empty buckets (Or lists). 
+ * 2) Do following
+ * 		a) for every array element array[i]. .......a) Insert array[i] into bucket[n*array[i]] 
+ * 3) Sort individual buckets using insertion sort. 
+ * 4) Concatenate all sorted buckets.
+ * 
  * @author hgarg
  *
  */
@@ -17,7 +24,7 @@ public class BucketSort extends AbstractSort {
 
 	@Override
 	public void sort(int[] array) {
-		
+		//TODO : Implement it 
 	}
 
 	public static void main(String[] args) {
