@@ -9,7 +9,7 @@ public class TestInner {
 		Integer b = 11;
 		class InnerClass {
 			void test() {
-				System.out.println(a + " : " + b);
+			//	System.out.println(a + " : " + b);
 			}
 		}
 
