@@ -35,8 +35,7 @@ public class ShellSort extends AbstractSort {
 				for (j = i; j >= gap && array[j - gap] > temp; j -= gap)
 					array[j] = array[j - gap];
 
-				// put temp (the original a[i]) in its correct
-				// location
+				// put temp (the original a[i]) in its correct location
 				array[j] = temp;
 			}
 		}
