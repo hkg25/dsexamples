@@ -71,6 +71,28 @@ public class InfixToPostFixConversion {
 		return sb.toString();
 	}
 
+	/**
+	 * Reverse a string having complexity n which is size of string
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public String reverse(String str) {
+		StringBuilder sb = new StringBuilder();
+		if (str != null && !str.isEmpty()) {
+			char arr[] = str.toCharArray();
+			int length = arr.length;
+			stack2 = new StackImplUsingArray<>(length);
+			for (int i = 0; i < length; i++) {
+				stack2.push("" + arr[i]);
+			}
+		}
+
+		while (!stack2.isEmpty())
+			sb.append(stack2.pop());
+		return sb.toString();
+	}
+
 	private boolean isOperand(char ch) {
 		return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 	}
@@ -101,6 +123,9 @@ public class InfixToPostFixConversion {
 
 		String actualExp = conversion.evaludatePostfix(postfix.toCharArray());
 		System.out.println("Actual Exp is : " + actualExp);
+
+		String str3 = "My Name is Harish";
+		System.out.println("Reverse of string is : " + conversion.reverse(str3));
 
 	}
 
