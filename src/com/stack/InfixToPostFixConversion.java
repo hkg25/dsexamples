@@ -2,15 +2,16 @@ package com.stack;
 
 public class InfixToPostFixConversion {
 
-	private StackImplUsingArray stack;
+	private StackImplUsingArray<Character> stack;
+
+	private StackImplUsingArray<String> stack2;
 
 	public InfixToPostFixConversion(int capacity) {
-		stack = new StackImplUsingArray(capacity);
+		stack = new StackImplUsingArray<>(capacity);
 	}
 
 	public String infixToPostFix(char arr[]) {
 		StringBuilder sb = new StringBuilder();
-		// int top = -1;
 		for (int i = 0; i < arr.length; i++) {
 			char ch = arr[i];
 			if (isOperand(ch)) {
@@ -19,17 +20,54 @@ public class InfixToPostFixConversion {
 				stack.push(ch);
 			} else if (ch == ')') {
 				while (!stack.isEmpty() && stack.peek() != '(')
-					stack.push(ch);
+					sb.append(stack.pop());
 				if (!stack.isEmpty() && stack.peek() != '(')
 					return null; // invalid expression
 				else
 					stack.pop();
 			} else { // an operator is encountered
-				while (!stack.isEmpty() && precedence(ch) <= precedence((char) stack.peek()))
-					sb.append((char) stack.pop());
+				while (!stack.isEmpty() && precedence(ch) <= precedence(stack.peek()))
+					sb.append(stack.pop());
 				stack.push(ch);
 			}
 		}
+
+		while (!stack.isEmpty())
+			sb.append(stack.pop());
+
+		return sb.toString();
+	}
+
+	public String evaludatePostfix(char arr[]) {
+		stack2 = new StackImplUsingArray<>(arr.length);
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < arr.length; i++) {
+			char ch = arr[i];
+			if (isOperand(ch)) {
+				stack2.push("" + ch);
+			} else {
+				String val1 = stack2.pop();
+				String val2 = stack2.pop();
+				switch (ch) {
+				case '+':
+					stack2.push(val2 + '+' + val1);
+					break;
+				case '-':
+					stack2.push(val2 + '-' + val1);
+					break;
+				case '*':
+					stack2.push(val2 + '*' + val1);
+					break;
+				case '/':
+					stack2.push(val2 + '/' + val1);
+					break;
+				case '^':
+					stack2.push(val2 + '^' + val1);
+					break;
+				}
+			}
+		}
+		sb.append(stack2.pop());
 		return sb.toString();
 	}
 
@@ -44,7 +82,7 @@ public class InfixToPostFixConversion {
 			return 1;
 		case '*':
 		case '/':
-			return 1;
+			return 2;
 		case '^':
 			return 3;
 		default:
@@ -55,9 +93,15 @@ public class InfixToPostFixConversion {
 
 	public static void main(String[] args) {
 		String str = "a+b*(c^d-e)^(f+g*h)-i";
-		char arr[] = str.toCharArray();
-		InfixToPostFixConversion conversion = new InfixToPostFixConversion(arr.length);
-		System.out.println(conversion.infixToPostFix(arr));
+		System.out.println("Infix Expression is : " + str);
+
+		InfixToPostFixConversion conversion = new InfixToPostFixConversion(str.toCharArray().length);
+		String postfix = conversion.infixToPostFix(str.toCharArray());
+		System.out.println("PostFix is : " + postfix);
+
+		String actualExp = conversion.evaludatePostfix(postfix.toCharArray());
+		System.out.println("Actual Exp is : " + actualExp);
+
 	}
 
 }

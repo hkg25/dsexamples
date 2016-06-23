@@ -1,38 +1,39 @@
 package com.stack;
 
-public class StackImplUsingArray {
+public class StackImplUsingArray<T> {
 
-	private int[] array;
+	private T[] array;
 
 	private int top;
 
 	private int capacity;
 
+	@SuppressWarnings("unchecked")
 	public StackImplUsingArray(int capacity) {
-		array = new int[capacity];
+		array = (T[]) new Object[capacity];
 		top = -1;
 		this.capacity = capacity;
 	}
 
-	public void push(int data) {
+	public void push(T data) {
 		if (isFull()) {
 			System.out.println("Stack is full");
 			return;
 		}
 		array[++top] = data;
-		System.out.println("Item is added to stack " + data);
+		// System.out.println("Item is added to stack " + data);
 	}
 
-	public int pop() {
-		int value = Integer.MIN_VALUE;
+	public T pop() {
+		T value = null;
 		if (!isEmpty()) {
 			value = array[top--];
 		}
 		return value;
 	}
 
-	public int peek() {
-		int value = Integer.MIN_VALUE;
+	public T peek() {
+		T value = null;
 		if (!isEmpty()) {
 			value = array[top];
 		}
@@ -48,7 +49,7 @@ public class StackImplUsingArray {
 	}
 
 	public static void main(String[] args) {
-		StackImplUsingArray stack = new StackImplUsingArray(10);
+		StackImplUsingArray<Integer> stack = new StackImplUsingArray<>(10);
 		stack.push(10);
 		stack.push(20);
 		stack.push(30);

@@ -7,6 +7,13 @@ public class Main {
 		SinglyLinkedList<String> list = new SinglyLinkedList<String>();
 		list.createList(str);
 		list.displayLinkedList();
+
+		// append characters java
+		char x = 'a';
+		char y = 'b';
+
+		System.out.println("\n" + (x +"+"+ y));
+
 	}
 
 }
